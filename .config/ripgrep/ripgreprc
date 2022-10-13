@@ -1,0 +1,14 @@
+# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+--max-columns=150
+--max-columns-preview
+
+# Set the colors.
+--colors=line:fg:yellow
+--colors=line:style:bold
+--colors=path:fg:red
+--colors=path:style:bold
+
+--colors=match:none
+--colors=match:bg:0x33,0x66,0xFF
+--colors=match:fg:white
+--colors=match:style:bold

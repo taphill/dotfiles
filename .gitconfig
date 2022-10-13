@@ -1,0 +1,42 @@
+[user]
+  name = Taylor Phillips
+  email = taylorscottphillips@gmail.com
+[init]
+  defaultBranch = main
+[alias]
+  a = add
+  b = branch
+  c = commit -m
+  co = checkout
+  d = diff
+  dt = difftool
+  lg = log --graph --decorate --pretty=oneline --abbrev-commit
+  lgv = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  s = status --short --branch
+  sb = switch 
+  u = restore --staged
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+[core]
+  pager = delta
+  editor = nvim
+  autocrlf = input
+	excludesfile = /Users/taylorphillips/.gitignore_global
+[diff]
+  tool = nvim
+[difftool]
+  prompt = false
+[difftool "nvim"]
+  cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+[merge]
+  tool = nvim
+[mergetool]
+  prompt = true
+  keepBackup = false
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+[interactive]
+  diffFilter = delta --color-only

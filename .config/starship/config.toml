@@ -1,0 +1,79 @@
+add_newline = false
+
+[line_break]
+disabled = true
+
+[cmd_duration]
+disabled = true
+
+[character]
+success_symbol = "[\\$](white)"
+error_symbol = "[\\$](white)"
+vicmd_symbol = "[V](green)"
+
+[directory]
+style = "bold cyan"
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+style = "bold purple"
+format = "[➜](yellow) [$branch]($style) "
+
+[git_status]
+format = "([$all_status*$ahead_behind ](bold red))"
+untracked = "\u0000"
+modified = "\u0000"
+staged = "\u0000"
+renamed = "\u0000"
+deleted = "\u0000"
+
+[aws]
+disabled = true
+
+[battery]
+format = "[$percentage]($style) "
+
+[cmake]
+disabled = true
+
+[deno]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[elixir]
+disabled = true
+
+[elm]
+disabled = true
+
+[golang]
+disabled = true
+
+[java]
+disabled = true
+
+[jobs]
+symbol = "[*](bold blue)"
+
+[lua]
+disabled = true
+
+[package]
+disabled = true
+
+[python]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[ruby]
+disabled = true
+
+[rust]
+disabled = true
+
+[terraform]
+disabled = true

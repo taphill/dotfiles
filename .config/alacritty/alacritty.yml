@@ -1,0 +1,57 @@
+window:
+  dimensions:
+    columns: 160
+    lines: 40
+  padding:
+    x: 20
+    'y': 20
+  title: ''
+  decorations: buttonless
+font:
+  normal:
+    family: Consolas for Powerline
+    style: Regular
+  bold:
+    family: Consolas for Powerline
+    style: BoldForPowerline
+  italic:
+    family: Consolas for Powerline
+    style: ItalicForPowerline
+  size: 18
+  offset:
+    x: 0
+    'y': 0
+draw_bold_text_with_bright_colors: true
+mouse:
+  hide_when_typing: true
+cursor:
+  style: Block
+key_bindings:
+  - key: P
+    mods: Shift|Command
+    action: ToggleFullscreen
+colors:
+  primary:
+    background: '#282c34'
+    foreground: '#ffffff'
+  cursor:
+    text: '#EBEBEB'
+    cursor: '#FF261E'
+  normal:
+    black: '#0d0d0d'
+    red: '#FF301B'
+    green: '#A0E521'
+    yellow: '#FFC620'
+    blue: '#1BA6FA'
+    magenta: '#d3869b'
+    cyan: '#21DEEF'
+    white: '#ebdbb2'
+  bright:
+    black: '#6D7070'
+    red: '#FF4352'
+    green: '#B8E466'
+    yellow: '#FFD750'
+    blue: '#1BA6FA'
+    magenta: '#AB9DF2'
+    cyan: '#73FBF1'
+    white: '#ebdbb2'

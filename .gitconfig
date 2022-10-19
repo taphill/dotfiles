@@ -24,7 +24,6 @@
   pager = delta
   editor = nvim
   autocrlf = input
-	excludesfile = /Users/taylorphillips/.gitignore_global
 [diff]
   tool = nvim
 [difftool]

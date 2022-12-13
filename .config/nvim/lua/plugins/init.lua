@@ -10,7 +10,6 @@ require 'paq' {
   'hrsh7th/nvim-cmp';
   'hrsh7th/cmp-vsnip';
   'hrsh7th/vim-vsnip';
-  'jose-elias-alvarez/typescript.nvim';
 
   -- Colorscheme
   'tjdevries/colorbuddy.nvim';
@@ -21,8 +20,6 @@ require 'paq' {
   'pangloss/vim-javascript';
   'MaxMEllon/vim-jsx-pretty';
   'prettier/vim-prettier';
-  'hashivim/vim-terraform';
-  'wuelnerdotexe/vim-astro';
 
   -- Utilities
   'jiangmiao/auto-pairs';

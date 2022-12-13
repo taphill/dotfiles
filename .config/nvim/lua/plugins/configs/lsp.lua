@@ -1,23 +1,22 @@
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
  vim.lsp.diagnostic.on_publish_diagnostics, {
-   -- Enable underline, use default values
-   underline = true,
+   -- Update LSP while typing in insert mode
+   update_in_insert = false,
 
-   -- Enable inline diagnostic, override spacing to 4
+   -- Enable underline, use default values
+   underline = false,
+
+   -- Enable inline diagnostic
+   virtual_text = false,
    -- virtual_text = {
    --   spacing = 4,
    -- },
-   
-   -- Disable inline diagnostic
-   virtual_text = false,
 
    -- Use a function to dynamically turn signs off
    -- and on, using buffer local variables
    -- signs = function(namespace, bufnr)
    --   return vim.b[bufnr].show_signs == true
    -- end,
-
-   update_in_insert = false,
  }
 )
 
@@ -40,22 +39,16 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 end
 
+local lsp_flags = {
+  -- This is the default in Nvim 0.7+
+  debounce_text_changes = 150,
+}
 
-require("typescript").setup({
-  disable_commands = false,
-  disable_formatting = false,
-  debug = false,
-  server = {
-    on_attach = on_attach
-  },
-})
+-- Enable autocomplete
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
--- local servers = { 'tsserver' }
--- for _, lsp in pairs(servers) do
---   require('lspconfig')[lsp].setup {
---     on_attach = on_attach,
---     flags = {
---       debounce_text_changes = 150,
---     }
---   }
--- end
+require('lspconfig')['tsserver'].setup{
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+}

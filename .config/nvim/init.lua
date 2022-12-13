@@ -13,6 +13,18 @@ local disabled_built_ins = {
 
 for i = 1, 7 do g['loaded_' .. disabled_built_ins[i]] = 1 end
 
+-- Utils
+vim.api.nvim_exec([[
+  function! SynStack()
+    if !exists("*synstack")
+      return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+  endfunc
+  noremap ,f :call SynStack()<CR>
+]], false)
+
+
 -- Colorscheme
 opt.termguicolors = true
 
@@ -78,7 +90,7 @@ opt.statusline = table.concat {
 }
 
 -- Plugin configs
--- require 'plugins/configs/cmp'
+require 'plugins/configs/cmp'
 require 'plugins/configs/fzf'
 require 'plugins/configs/lsp'
 require 'plugins/configs/nvim_comment'
@@ -103,15 +115,16 @@ api.nvim_set_keymap('n', '<space>f', '<cmd>Files<CR>', opts)
 api.nvim_set_keymap('n', '<space>s', '<cmd>Rg<CR>', opts)
 api.nvim_set_keymap('n', '<space>b', '<cmd>Buffers<CR>', opts)
 api.nvim_set_keymap('n', '<space>g', '<cmd>Git<CR>', opts)
+api.nvim_set_keymap('v', ',c', '"+y', opts)
 api.nvim_set_keymap('n', ',ws', '<cmd>write <bar> suspend<CR>', opts)
-api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-api.nvim_set_keymap('v', ',c', '"+y', opts)
 
 -- Snippets
 api.nvim_set_keymap('n', ',doc', ':-1read $HOME/.config/nvim/snippets/doctype.html<CR>6j3wl', opts)
+api.nvim_set_keymap('n', ',pry', ':-1read $HOME/.config/nvim/snippets/pry.rb<CR>', opts)
 api.nvim_set_keymap('n', ',root', ':-1read $HOME/.config/nvim/snippets/doctype_react.html<CR>6j3wl', opts)
 api.nvim_set_keymap('n', ',main', ':-1read $HOME/.config/nvim/snippets/main.jsx<CR>', opts)
 api.nvim_set_keymap('n', ',app', ':-1read $HOME/.config/nvim/snippets/app.jsx<CR>', opts)

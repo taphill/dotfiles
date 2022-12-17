@@ -1,5 +1,5 @@
 -- Setup
-require 'plugins/init'
+require 'plugins'
 
 local g = vim.g
 local api = vim.api
@@ -14,15 +14,15 @@ local disabled_built_ins = {
 for i = 1, 7 do g['loaded_' .. disabled_built_ins[i]] = 1 end
 
 -- Utils
-vim.api.nvim_exec([[
-  function! SynStack()
-    if !exists("*synstack")
-      return
-    endif
-    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-  endfunc
-  noremap ,f :call SynStack()<CR>
-]], false)
+-- vim.api.nvim_exec([[
+--   function! SynStack()
+--     if !exists("*synstack")
+--       return
+--     endif
+--     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+--   endfunc
+--   noremap ,f :call SynStack()<CR>
+-- ]], false)
 
 
 -- Colorscheme
@@ -89,42 +89,20 @@ opt.statusline = table.concat {
   ' %*'
 }
 
--- Plugin configs
-require 'plugins/configs/cmp'
-require 'plugins/configs/fzf'
-require 'plugins/configs/lsp'
-require 'plugins/configs/nvim_comment'
-
--- Emmet shortcuts
-g.user_emmet_mode = 'n'
-g.user_emmet_leader_key = ','
-
 -- Mappings
+vim.g.mapleader = " "
 local opts = { noremap=true, silent=true }
 
-api.nvim_set_keymap('n', '<space>ee', '<cmd>Explore<CR>', opts)
-api.nvim_set_keymap('n', '<space>es', '<cmd>Sexplore<CR>', opts)
-api.nvim_set_keymap('n', '<space>ev', '<cmd>Vexplore<CR>', opts)
-api.nvim_set_keymap('n', '<space>h', '<C-W><C-H><CR>', opts)
-api.nvim_set_keymap('n', '<space>j', '<C-W><C-J><CR>', opts)
-api.nvim_set_keymap('n', '<space>k', '<C-W><C-K><CR>', opts)
-api.nvim_set_keymap('n', '<space>l', '<C-W><C-L><CR>', opts)
-api.nvim_set_keymap('n', '<space>t', '<cmd>tabn<CR>', opts)
-api.nvim_set_keymap('n', '<space>r', '<cmd>tabp<CR>', opts)
-api.nvim_set_keymap('n', '<space>f', '<cmd>Files<CR>', opts)
-api.nvim_set_keymap('n', '<space>s', '<cmd>Rg<CR>', opts)
-api.nvim_set_keymap('n', '<space>b', '<cmd>Buffers<CR>', opts)
-api.nvim_set_keymap('n', '<space>g', '<cmd>Git<CR>', opts)
+api.nvim_set_keymap('n', '<leader>ee', '<cmd>Explore<CR>', opts)
+api.nvim_set_keymap('n', '<leader>es', '<cmd>Sexplore<CR>', opts)
+api.nvim_set_keymap('n', '<leader>ev', '<cmd>Vexplore<CR>', opts)
+api.nvim_set_keymap('n', '<leader>h', '<C-W><C-H><CR>', opts)
+api.nvim_set_keymap('n', '<leader>j', '<C-W><C-J><CR>', opts)
+api.nvim_set_keymap('n', '<leader>k', '<C-W><C-K><CR>', opts)
+api.nvim_set_keymap('n', '<leader>l', '<C-W><C-L><CR>', opts)
+api.nvim_set_keymap('n', '<leader>t', '<cmd>tabn<CR>', opts)
+api.nvim_set_keymap('n', '<leader>r', '<cmd>tabp<CR>', opts)
 api.nvim_set_keymap('v', ',c', '"+y', opts)
 api.nvim_set_keymap('n', ',ws', '<cmd>write <bar> suspend<CR>', opts)
 api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-
--- Snippets
-api.nvim_set_keymap('n', ',doc', ':-1read $HOME/.config/nvim/snippets/doctype.html<CR>6j3wl', opts)
-api.nvim_set_keymap('n', ',pry', ':-1read $HOME/.config/nvim/snippets/pry.rb<CR>', opts)
-api.nvim_set_keymap('n', ',root', ':-1read $HOME/.config/nvim/snippets/doctype_react.html<CR>6j3wl', opts)
-api.nvim_set_keymap('n', ',main', ':-1read $HOME/.config/nvim/snippets/main.jsx<CR>', opts)
-api.nvim_set_keymap('n', ',app', ':-1read $HOME/.config/nvim/snippets/app.jsx<CR>', opts)

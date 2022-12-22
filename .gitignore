@@ -8,6 +8,8 @@
 
 !Brewfile
 
+!bootstrap.sh
+
 .config/configstore/
 .config/gh/hosts.yml
 .config/nvim/plugin

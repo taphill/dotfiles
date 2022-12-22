@@ -93,6 +93,9 @@ opt.statusline = table.concat {
 vim.g.mapleader = " "
 local opts = { noremap=true, silent=true }
 
+vim.g.user_emmet_mode = 'n'
+vim.g.user_emmet_leader_key = ','
+
 api.nvim_set_keymap('n', '<leader>ee', '<cmd>Explore<CR>', opts)
 api.nvim_set_keymap('n', '<leader>es', '<cmd>Sexplore<CR>', opts)
 api.nvim_set_keymap('n', '<leader>ev', '<cmd>Vexplore<CR>', opts)

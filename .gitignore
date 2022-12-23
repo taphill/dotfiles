@@ -8,7 +8,7 @@
 
 !Brewfile
 
-!bootstrap.sh
+!install.sh
 
 .config/configstore/
 .config/gh/hosts.yml

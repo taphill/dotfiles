@@ -1,8 +1,14 @@
+export PATH="/Users/taylorphillips/.deno/bin:$PATH"
+
 export EDITOR="nvim"
 export KEYTIMEOUT=1
 
 # Node
 export NVM_DIR="$HOME/.nvm"
+
+# AWS
+export AWS_PROFILE="foodmaven"
+export SAM_CLI_TELEMETRY=0
 
 # Directories
 export ZDOTDIR="$HOME/.config/zsh"

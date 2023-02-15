@@ -4,6 +4,7 @@ alias home="cd $HOME; clear"
 alias src="source $HOME/.config/zsh/.zshrc; clear"
 alias conf="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
+alias vs='code -r'
 alias of='nvim "$(fzf)"'
 alias pf='bat "$(fzf)"'
 alias track="git branch -a | fzf --header 'Track Branch' | xargs git switch --track"

@@ -1,111 +1,127 @@
--- Setup
 require 'plugins'
 
-local g = vim.g
-local api = vim.api
-local cmd = vim.cmd
-local opt = vim.opt
+--
+-- [[ Options ]]
+-- See `:help vim.o`
+--
+
+-- Set colorscheme
+vim.o.termguicolors = true
+vim.cmd('colorscheme kanagawa')
+
+-- Set cursorline highlight. This does make screen redrawing slower when enabled
+vim.o.cursorline = true
+
+-- Set line numbers and relative line numbers
+vim.wo.number = true
+vim.wo.rnu = true
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
+
+-- Set indent options
+vim.bo.autoindent = true
+vim.bo.smartindent = true
+vim.wo.breakindent = true
+
+-- Set line wrapping
+vim.wo.wrap = false
+
+-- Use spaces instead of tabs
+vim.bo.expandtab = true
+
+-- Use 2 spaces by default
+vim.bo.tabstop = 2
+vim.bo.softtabstop = 2
+vim.bo.shiftwidth = 2
+
+-- Case insensitive searching UNLESS /C or capital in search
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+-- Decrease update time
+vim.o.updatetime = 250
+
+-- Keep side signcolumn expanded
+-- vim.wo.signcolumn = 'yes'
+
+-- When splitting a window, put the new window below the current
+vim.o.splitbelow = true
+
+-- When vert splitting a window, put the new window to the right of the current
+vim.o.splitright = true
+
+-- Minimum number of screen lines to keep above and below the cursor
+vim.o.scrolloff = 10
+
+-- Don't show partial command in the bottom right
+vim.o.showcmd = false
+
+-- Disable ruler
+vim.o.ruler = false
+
+-- Maximum column length to highlight syntax
+-- Lower values will help avoid slow redrawing
+vim.bo.synmaxcol = 200
+
+
+
+--
+-- [[ Keymaps ]]
+-- See `:help vim.keymap.set()`
+--
+
+vim.g.mapleader = " "
+vim.g.user_emmet_mode = 'n'
+vim.g.user_emmet_leader_key = ','
+
+local opts = { noremap=true, silent=true }
+
+vim.keymap.set('v', ',c', '"+y', opts)
+vim.keymap.set('n', '<leader>t', '<cmd>tabn<CR>', opts)
+vim.keymap.set('n', '<leader>r', '<cmd>tabp<CR>', opts)
+vim.keymap.set('n', '<leader>h', '<C-W><C-H><CR>', opts)
+vim.keymap.set('n', '<leader>j', '<C-W><C-J><CR>', opts)
+vim.keymap.set('n', '<leader>k', '<C-W><C-K><CR>', opts)
+vim.keymap.set('n', '<leader>l', '<C-W><C-L><CR>', opts)
+vim.keymap.set('n', '<leader>ee', '<cmd>Explore<CR>', opts)
+vim.keymap.set('n', '<leader>ex', '<cmd>Sexplore<CR>', opts)
+vim.keymap.set('n', '<leader>ev', '<cmd>Vexplore<CR>', opts)
+vim.keymap.set('n', ',ws', '<cmd>write <bar> suspend<CR>', opts)
+
+
+
+--
+-- [[ Auto commands ]]
+--
+
+-- Format on save
+vim.cmd('autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()')
+
+-- File specific settings
+vim.cmd('autocmd Filetype go setlocal tabstop=8 shiftwidth=8 softtabstop=8')
+vim.cmd('autocmd Filetype markdown setlocal wrap textwidth=65')
+
+-- Highlight on yank
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
+
+
+
+--
+-- [[ Misc. Functions ]]
+--
 
 -- Disable some built-in plugins we don't want
 local disabled_built_ins = {
   'gzip', 'man', 'shada_plugin', 'tarPlugin', 'tar', 'zipPlugin', 'zip'
 }
 
-for i = 1, 7 do g['loaded_' .. disabled_built_ins[i]] = 1 end
+for i = 1, 7 do vim.g['loaded_' .. disabled_built_ins[i]] = 1 end
 
--- Utils
--- vim.api.nvim_exec([[
---   function! SynStack()
---     if !exists("*synstack")
---       return
---     endif
---     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
---   endfunc
---   noremap ,f :call SynStack()<CR>
--- ]], false)
-
-
--- Colorscheme
-opt.termguicolors = true
-
-local background = 'dark'
-
-if background == 'dark' then
-  require('colorbuddy').colorscheme('glamour_nvim')
-else
-  require('colorbuddy').colorscheme('inspired_github_nvim')
-end
-
--- Settings
-opt.expandtab       = true
-opt.undolevels      = 1000
-opt.ttimeoutlen     = 20
-opt.shiftwidth      = 2
-opt.softtabstop     = 2
-opt.smartindent     = true
-opt.splitbelow      = true
-opt.splitright      = true
-opt.tabstop         = 2
-opt.synmaxcol       = 200
-opt.updatetime      = 200
-opt.conceallevel    = 2
-opt.cscopetagorder  = 0
-opt.cscopepathcomp  = 3
-opt.showbreak       = string.rep(' ', 3) -- Make it so that long lines wrap smartly
-
--- UI
-opt.wrap            = false
-opt.cursorline      = true
-opt.number          = true
-opt.rnu             = true
-opt.showcmd         = false
-opt.showmode        = false
-opt.ruler           = false
-opt.pumblend        = 20
-opt.pumheight       = 15
-opt.cmdheight       = 1
-opt.scrolloff       = 10
-opt.sidescrolloff   = 5
-
--- Auto commands
-cmd('autocmd Filetype go setlocal tabstop=8 shiftwidth=8 softtabstop=8')
-cmd('autocmd Filetype markdown setlocal wrap textwidth=65')
-
--- Status line
-opt.statusline = table.concat {
-  '%#CursorLine#',
-  ' ‹‹ ',
-  '%f',
-  ' ›› ',
-  '%#DiffChange#',
-  '%(  %M%R  %)',
-  '%#CursorLine#',
-  '%=',
-  '  %*',
-  '%#CursorLine#',
-  ' ::',
-  ' %{FugitiveStatusline()}',
-  ' ::',
-  ' %*'
-}
-
--- Mappings
-vim.g.mapleader = " "
-local opts = { noremap=true, silent=true }
-
-vim.g.user_emmet_mode = 'n'
-vim.g.user_emmet_leader_key = ','
-
-api.nvim_set_keymap('n', '<leader>ee', '<cmd>Explore<CR>', opts)
-api.nvim_set_keymap('n', '<leader>es', '<cmd>Sexplore<CR>', opts)
-api.nvim_set_keymap('n', '<leader>ev', '<cmd>Vexplore<CR>', opts)
-api.nvim_set_keymap('n', '<leader>h', '<C-W><C-H><CR>', opts)
-api.nvim_set_keymap('n', '<leader>j', '<C-W><C-J><CR>', opts)
-api.nvim_set_keymap('n', '<leader>k', '<C-W><C-K><CR>', opts)
-api.nvim_set_keymap('n', '<leader>l', '<C-W><C-L><CR>', opts)
-api.nvim_set_keymap('n', '<leader>t', '<cmd>tabn<CR>', opts)
-api.nvim_set_keymap('n', '<leader>r', '<cmd>tabp<CR>', opts)
-api.nvim_set_keymap('v', ',c', '"+y', opts)
-api.nvim_set_keymap('n', ',ws', '<cmd>write <bar> suspend<CR>', opts)
-api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)

@@ -12,7 +12,9 @@
 
 .config/configstore/
 .config/gh/hosts.yml
+.config/github-copilot
 .config/nvim/plugin
+.config/planetscale
 .config/yarn
 .config/zsh/.zcompcache/
 .config/zsh/.zcompdump

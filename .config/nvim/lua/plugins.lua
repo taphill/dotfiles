@@ -27,18 +27,8 @@ return require('packer').startup(function(use)
   }
 
   -- Treesitter
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
-    end,
-  }
-
-  -- Additional text objects via treesitter
-  use {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    after = 'nvim-treesitter',
-  }
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use { 'nvim-treesitter/playground' }
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -51,15 +41,15 @@ return require('packer').startup(function(use)
   use 'github/copilot.vim'
 
   -- Colorscheme
-  use "rebelot/kanagawa.nvim"
+  use 'rebelot/kanagawa.nvim'
 
   -- Utilities
   use 'mattn/emmet-vim'
   use 'mbbill/undotree'
-  use 'folke/zen-mode.nvim'
   use 'windwp/nvim-autopairs'
   use 'numToStr/Comment.nvim'
   use 'prettier/vim-prettier'
+  use 'maxmellon/vim-jsx-pretty'
 
   -- Text objects
   use 'wellle/targets.vim'

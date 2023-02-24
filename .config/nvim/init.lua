@@ -5,35 +5,32 @@ require 'plugins'
 -- See `:help vim.o`
 --
 
--- Set colorscheme
-vim.o.termguicolors = true
-vim.cmd('colorscheme kanagawa')
-
 -- Set cursorline highlight. This does make screen redrawing slower when enabled
 vim.o.cursorline = true
 
 -- Set line numbers and relative line numbers
-vim.wo.number = true
-vim.wo.rnu = true
+vim.o.number = true
+vim.o.rnu = true
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
-
--- Set indent options
-vim.bo.autoindent = true
-vim.bo.smartindent = true
-vim.wo.breakindent = true
 
 -- Set line wrapping
 vim.wo.wrap = false
 
 -- Use spaces instead of tabs
-vim.bo.expandtab = true
+vim.o.expandtab = true
 
--- Use 2 spaces by default
-vim.bo.tabstop = 2
-vim.bo.softtabstop = 2
-vim.bo.shiftwidth = 2
+-- Set the deafult number of spaces
+local spaces = 4
+vim.o.tabstop = spaces
+vim.o.softtabstop = spaces
+vim.o.shiftwidth = spaces
+
+-- Set indent options
+vim.o.autoindent = true
+vim.o.smartindent = true
+vim.o.breakindent = true
 
 -- Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
@@ -42,8 +39,8 @@ vim.o.smartcase = true
 -- Decrease update time
 vim.o.updatetime = 250
 
--- Keep side signcolumn expanded
--- vim.wo.signcolumn = 'yes'
+-- Keep the signcolumn expanded
+vim.wo.signcolumn = 'yes'
 
 -- When splitting a window, put the new window below the current
 vim.o.splitbelow = true
@@ -96,10 +93,10 @@ vim.keymap.set('n', ',ws', '<cmd>write <bar> suspend<CR>', opts)
 --
 
 -- Format on save
-vim.cmd('autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()')
+-- vim.cmd('autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()')
 
 -- File specific settings
-vim.cmd('autocmd Filetype go setlocal tabstop=8 shiftwidth=8 softtabstop=8')
+vim.cmd('autocmd Filetype go setlocal tabstop=8 softtabstop=8 shiftwidth=8')
 vim.cmd('autocmd Filetype markdown setlocal wrap textwidth=65')
 
 -- Highlight on yank

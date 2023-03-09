@@ -96,7 +96,7 @@ vim.bo.synmaxcol = 200
 -- See `:help vim.keymap.set()`
 --
 
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
 vim.g.user_emmet_mode = 'n'
 vim.g.user_emmet_leader_key = ','
 

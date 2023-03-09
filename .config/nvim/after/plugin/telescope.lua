@@ -37,18 +37,28 @@ telescope.setup {
 
 telescope.load_extension('fzf')
 
-vim.keymap.set('n', '<leader>fp', builtin.find_files, { desc = '[F]ind [F]iles' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
-vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current [W]ord' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind existing [B]uffers' })
-vim.keymap.set('n', '<leader>fm', builtin.marks, { desc = '[F]ind existing [M]arks' })
-vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
-vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[F]ind [R]ecently opened files' })
+local nmap = function(keys, func, desc)
+  vim.keymap.set('n', keys, func, { desc = desc })
+end
 
-vim.keymap.set('n', '<leader><leader>', function()
-  builtin.current_buffer_fuzzy_find(themes.get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end, { desc = '[  ] Fuzzily search in current buffer' })
+nmap('gr', builtin.lsp_references, '[G]oto [R]eferences')
+nmap('<leader>fp', builtin.find_files, '[F]ind files')
+nmap('<leader>fh', builtin.help_tags, '[F]ind [H]elp')
+nmap('<leader>fw', builtin.grep_string, '[F]ind current [W]ord')
+nmap('<leader>fg', builtin.live_grep, '[F]ind by [G]rep')
+nmap('<leader>fb', builtin.buffers, '[F]ind existing [B]uffers')
+nmap('<leader>fm', builtin.marks, '[F]ind existing [M]arks')
+nmap('<leader>fd', builtin.diagnostics, '[F]ind [D]iagnostics')
+nmap('<leader>fr', builtin.oldfiles, '[F]ind [R]ecently opened files')
+nmap('<leader>fs', builtin.lsp_document_symbols, '[F]ind document [S]ymbols')
+
+nmap(
+  '<leader><leader>',
+  function()
+    builtin.current_buffer_fuzzy_find(themes.get_dropdown {
+      winblend = 10,
+      previewer = false,
+    })
+  end,
+  '[  ] Fuzzily search in current buffer'
+)

@@ -17,12 +17,18 @@ lsp.ensure_installed({
   'tsserver',
 })
 
+local lsp_util = require('lspconfig.util')
+
 lsp.configure('denols', {
-  root_dir = require('lspconfig.util').root_pattern('deno.json','deno.jsonc')
+  root_dir = lsp_util.root_pattern('deno.json','deno.jsonc')
+})
+
+lsp.configure('tailwindcss', {
+  root_dir = lsp_util.root_pattern('tailwind.config.js', 'tailwind.config.cjs')
 })
 
 lsp.configure('tsserver', {
-  root_dir = require('lspconfig.util').root_pattern('package.json', 'tsconfig.json', 'jsconfig.json')
+  root_dir = lsp_util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json')
 })
 
 local cmp = require('cmp')
@@ -69,12 +75,9 @@ lsp.on_attach(function(client, bufnr)
   nmap(']d', vim.diagnostic.goto_next, 'Go to next Diagnostic')
   nmap('[d', vim.diagnostic.goto_prev, 'Go to previous Diagnostic')
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 end)

@@ -32,7 +32,8 @@ vim.cmd("colorscheme kanagawa")
 -- See `:help vim.o`
 --
 
--- Set cursorline highlight. This does make screen redrawing slower when enabled
+-- Set cursorline highlight.
+-- This does make screen redrawing slower when enabled, but I haven't noticed any issues
 vim.o.cursorline = true
 
 -- Set line numbers and relative line numbers
@@ -142,7 +143,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- [[ Misc. Functions ]]
 --
 
--- Disable some built-in plugins we don't want
+-- Disable some built-in plugins I don't want
 local disabled_built_ins = {
   'gzip', 'man', 'shada_plugin', 'tarPlugin', 'tar', 'zipPlugin', 'zip'
 }

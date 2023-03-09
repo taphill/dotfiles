@@ -32,13 +32,13 @@ return require('packer').startup(function(use)
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-
-  -- Statusline
-  use 'nvim-lualine/lualine.nvim'
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- Copilot
   use 'github/copilot.vim'
+
+  -- Statusline
+  use 'nvim-lualine/lualine.nvim'
 
   -- Colorscheme
   use 'rebelot/kanagawa.nvim'
@@ -49,7 +49,6 @@ return require('packer').startup(function(use)
   use 'windwp/nvim-autopairs'
   use 'numToStr/Comment.nvim'
   use 'prettier/vim-prettier'
-  use 'maxmellon/vim-jsx-pretty'
 
   -- Text objects
   use 'wellle/targets.vim'

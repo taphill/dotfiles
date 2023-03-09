@@ -1,3 +1,8 @@
+--
+-- [[ LSP ]]
+-- See `:help lsp-zero`
+--
+
 local lsp = require('lsp-zero').preset({
   name = 'minimal',
   set_lsp_keymaps = false,
@@ -8,6 +13,7 @@ local lsp = require('lsp-zero').preset({
 lsp.ensure_installed({
   'denols',
   'prismals',
+  'tailwindcss',
   'tsserver',
 })
 

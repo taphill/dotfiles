@@ -1,6 +1,33 @@
 require 'plugins'
 
 --
+-- [[ Colorscheme ]]
+--
+
+vim.o.termguicolors = true
+vim.o.background = 'dark'
+
+require('kanagawa').setup({
+  overrides = function(colors)
+    local c = colors.palette
+    return {
+      ['@boolean'] = { fg = c.surimiOrange , bold = false },
+      ['@conditional'] = { fg = c.oniViolet, bold = false },
+      ['@conditional.ternary'] = { fg = c.fujiWhite },
+      ['@constant'] = { fg = c.fujiWhite },
+      ['@tag'] = { fg = c.oniViolet },
+      htmlEndTag = { fg = c.crystalBlue },
+      htmlTagName = { fg = c.oniViolet, bold = false },
+      jsonKeyword = { fg = c.oniViolet, bold = false },
+    }
+  end,
+})
+
+vim.cmd("colorscheme kanagawa")
+
+
+
+--
 -- [[ Options ]]
 -- See `:help vim.o`
 --
@@ -22,7 +49,7 @@ vim.wo.wrap = false
 vim.o.expandtab = true
 
 -- Set the deafult number of spaces
-local spaces = 4
+local spaces = 2
 vim.o.tabstop = spaces
 vim.o.softtabstop = spaces
 vim.o.shiftwidth = spaces

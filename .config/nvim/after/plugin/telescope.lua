@@ -1,7 +1,9 @@
--- [[ Configure Telescope ]]
+--
+-- [[ Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 -- See `:help telescope.builtin`
 -- See `:help telescope.themes`
+--
 
 local telescope = require('telescope')
 local actions = require('telescope.actions')

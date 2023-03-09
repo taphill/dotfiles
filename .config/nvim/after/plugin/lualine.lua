@@ -1,5 +1,8 @@
--- Set lualine as statusline
+--
+-- [[ Lualine ]]
 -- See `:help lualine.txt`
+--
+
 require('lualine').setup {
   options = {
     icons_enabled = false,

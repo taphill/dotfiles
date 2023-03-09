@@ -8,9 +8,20 @@ vim.o.termguicolors = true
 vim.o.background = 'dark'
 
 require('kanagawa').setup({
+  colors = {
+    theme = {
+        all = {
+            ui = {
+                bg_gutter = "none"
+            }
+        }
+    }
+  },
   overrides = function(colors)
     local c = colors.palette
+    local theme = colors.theme
     return {
+      -- Built-in highlight groups
       ['@boolean'] = { fg = c.surimiOrange , bold = false },
       ['@conditional'] = { fg = c.oniViolet, bold = false },
       ['@conditional.ternary'] = { fg = c.fujiWhite },
@@ -18,7 +29,30 @@ require('kanagawa').setup({
       ['@tag'] = { fg = c.oniViolet },
       htmlEndTag = { fg = c.crystalBlue },
       htmlTagName = { fg = c.oniViolet, bold = false },
+      jsonBoolean = { fg = c.surimiOrange, bold = false },
       jsonKeyword = { fg = c.oniViolet, bold = false },
+
+      -- 'MaxMEllon/vim-jsx-pretty' highlight groups
+      jsxOpenPunct = { fg = c.springViolet2, italic = false },
+      jsxClosePunct = { fg = c.springViolet2, italic = false },
+      javaScriptBoolean = { fg = c.surimiOrange, bold = false },
+      javaScriptConditional = { fg = c.oniViolet, bold = false },
+      javaScriptLabel = { fg = c.oniViolet, bold = false },
+      javaScriptReserved = { fg = c.waveRed, italic = false },
+      javaScriptStatement = { fg = c.peachRed, bold = false },
+      typescriptBoolean = { fg = c.surimiOrange, bold = false },
+      typescriptConditional = { fg = c.oniViolet, bold = false },
+      typescriptDefault = { fg = c.oniViolet, bold = false },
+      typescriptStatementKeyword = { fg = c.peachRed, bold = false },
+
+      -- Custom Telescope UI
+      TelescopeTitle = { fg = theme.ui.special, bold = true },
+      TelescopePromptNormal = { bg = theme.ui.bg_p1 },
+      TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+      TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+      TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+      TelescopePreviewNormal = { bg = theme.ui.bg_dim },
+      TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
     }
   end,
 })

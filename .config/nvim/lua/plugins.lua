@@ -49,6 +49,7 @@ return require('packer').startup(function(use)
   use 'windwp/nvim-autopairs'
   use 'numToStr/Comment.nvim'
   use 'prettier/vim-prettier'
+  use 'MaxMEllon/vim-jsx-pretty'
 
   -- Text objects
   use 'wellle/targets.vim'

@@ -1,4 +1,5 @@
 require 'plugins'
+require 'impatient'
 
 --
 -- [[ Colorscheme ]]
@@ -43,6 +44,7 @@ require('kanagawa').setup({
       typescriptBoolean = { fg = c.surimiOrange, bold = false },
       typescriptConditional = { fg = c.oniViolet, bold = false },
       typescriptDefault = { fg = c.oniViolet, bold = false },
+      typescriptObjectLabel = { fg = c.carpYellow, bold = false },
       typescriptStatementKeyword = { fg = c.peachRed, bold = false },
 
       -- Custom Telescope UI

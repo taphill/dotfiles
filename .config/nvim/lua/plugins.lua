@@ -50,6 +50,7 @@ return require('packer').startup(function(use)
   use 'numToStr/Comment.nvim'
   use 'prettier/vim-prettier'
   use 'MaxMEllon/vim-jsx-pretty'
+  use 'lewis6991/impatient.nvim'
 
   -- Text objects
   use 'wellle/targets.vim'

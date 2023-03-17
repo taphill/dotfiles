@@ -20,6 +20,8 @@ alias dce="docker compose exec"
 alias run="docker compose run --rm"
 alias runp="docker compose run --rm --publish 80:8080"
 
+alias as="zsh $HOME/bin/tmux_attach_or_create_session.sh"
+
 
 # Utilities
 

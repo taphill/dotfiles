@@ -30,3 +30,6 @@ export BAT_THEME='gruvbox-dark'
 
 # Enhancd options
 export ENHANCD_DISABLE_DOT=1
+
+# This is needed so that neovim syntax highlighting works in tmux
+export TERM="xterm-256color"

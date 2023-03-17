@@ -12,6 +12,9 @@ function edit() {
     (s)
       $EDITOR ~/.config/starship/config.toml
       ;;
+    (t)
+      $EDITOR ~/.config/tmux/tmux.conf
+      ;;
     (g)
       $EDITOR ~/.gitconfig
       ;;

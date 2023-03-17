@@ -27,9 +27,9 @@ mouse:
 cursor:
   style: Block
 key_bindings:
-  - key: P
+  - key: N
     mods: Shift|Command
-    action: ToggleFullscreen
+    action: SpawnNewInstance
 
 # Kanagawa Alacritty Colors
 colors:

@@ -51,6 +51,7 @@ return require('packer').startup(function(use)
   use 'prettier/vim-prettier'
   use 'MaxMEllon/vim-jsx-pretty'
   use 'lewis6991/impatient.nvim'
+  use 'christoomey/vim-tmux-navigator'
 
   -- Text objects
   use 'wellle/targets.vim'

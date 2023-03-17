@@ -138,16 +138,19 @@ vim.g.user_emmet_leader_key = ','
 
 local opts = { noremap=true, silent=true }
 
+vim.keymap.set('i', 'jk', '<esc>', opts)
 vim.keymap.set('v', ',c', '"+y', opts)
 vim.keymap.set('n', '<leader>t', '<cmd>tabn<CR>', opts)
 vim.keymap.set('n', '<leader>r', '<cmd>tabp<CR>', opts)
-vim.keymap.set('n', '<leader>h', '<C-W><C-H><CR>', opts)
-vim.keymap.set('n', '<leader>j', '<C-W><C-J><CR>', opts)
-vim.keymap.set('n', '<leader>k', '<C-W><C-K><CR>', opts)
-vim.keymap.set('n', '<leader>l', '<C-W><C-L><CR>', opts)
+vim.keymap.set('n', '<C-h>', '<C-W>h', opts)
+vim.keymap.set('n', '<C-j>', '<C-W>j', opts)
+vim.keymap.set('n', '<C-k>', '<C-W>k', opts)
+vim.keymap.set('n', '<C-l>', '<C-W>l', opts)
 vim.keymap.set('n', '<leader>ee', '<cmd>Explore<CR>', opts)
 vim.keymap.set('n', '<leader>ex', '<cmd>Sexplore<CR>', opts)
 vim.keymap.set('n', '<leader>ev', '<cmd>Vexplore<CR>', opts)
+vim.keymap.set('n', '<leader>z', ':wincmd _<cr>:wincmd |<cr>', opts)
+vim.keymap.set('n', '<leader>=', ':wincmd =<cr>', opts)
 vim.keymap.set('n', ',ws', '<cmd>write <bar> suspend<CR>', opts)
 
 
@@ -158,6 +161,9 @@ vim.keymap.set('n', ',ws', '<cmd>write <bar> suspend<CR>', opts)
 
 -- Format on save
 -- vim.cmd('autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()')
+
+-- Automatically rebalance windows on vim resize
+vim.cmd('autocmd VimResized * :wincmd =')
 
 -- File specific settings
 vim.cmd('autocmd Filetype go setlocal tabstop=8 softtabstop=8 shiftwidth=8')

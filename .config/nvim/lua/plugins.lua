@@ -47,11 +47,13 @@ return require('packer').startup(function(use)
   use 'mattn/emmet-vim'
   use 'mbbill/undotree'
   use 'windwp/nvim-autopairs'
-  use 'numToStr/Comment.nvim'
   use 'prettier/vim-prettier'
   use 'MaxMEllon/vim-jsx-pretty'
   use 'lewis6991/impatient.nvim'
   use 'christoomey/vim-tmux-navigator'
+  use 'christoomey/vim-tmux-runner'
+  use 'architect/vim-plugin'
+  -- use '~/dev/projects/vim-plugin'
 
   -- Text objects
   use 'wellle/targets.vim'
@@ -61,6 +63,7 @@ return require('packer').startup(function(use)
   use 'michaeljsmith/vim-indent-object'
 
   -- Tpope stuff
+  use 'tpope/vim-commentary'
   use 'tpope/vim-endwise'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rails'

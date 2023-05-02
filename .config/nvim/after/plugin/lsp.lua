@@ -71,8 +71,28 @@ null_ls.setup({
 	sources = {
 		null_ls.builtins.diagnostics.actionlint,
 		null_ls.builtins.diagnostics.cfn_lint,
-		null_ls.builtins.formatting.deno_fmt,
-		null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.deno_fmt.with({
+			condition = function(utils)
+				return utils.root_has_file("deno.json", "deno.jsonc")
+			end,
+		}),
+		null_ls.builtins.formatting.prettier.with({
+			condition = function(utils)
+				return utils.root_has_file({
+					".prettierrc",
+					".prettierrc.cjs",
+					".prettierrc.js",
+					".prettierrc.json",
+					".prettierrc.json5",
+					".prettierrc.toml",
+					".prettierrc.yml",
+					".prettierrc.yaml",
+					".prettierrc.yaml",
+					"prettier.config.cjs",
+					"prettier.config.js",
+				})
+			end,
+		}),
 		null_ls.builtins.formatting.prismaFmt,
 		null_ls.builtins.formatting.stylua,
 	},

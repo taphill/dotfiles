@@ -69,6 +69,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
 	-- Diagnostics for various Linters and formatters
 	sources = {
+		null_ls.builtins.diagnostics.actionlint,
 		null_ls.builtins.diagnostics.cfn_lint,
 		null_ls.builtins.diagnostics.yamllint,
 		null_ls.builtins.formatting.deno_fmt,

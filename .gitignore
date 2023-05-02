@@ -11,6 +11,8 @@
 
 !install.sh
 
+bin/curl
+
 .config/configstore/
 .config/gh/hosts.yml
 .config/github-copilot

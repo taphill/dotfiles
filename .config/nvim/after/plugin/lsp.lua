@@ -71,7 +71,6 @@ null_ls.setup({
 	sources = {
 		null_ls.builtins.diagnostics.actionlint,
 		null_ls.builtins.diagnostics.cfn_lint,
-		null_ls.builtins.diagnostics.yamllint,
 		null_ls.builtins.formatting.deno_fmt,
 		null_ls.builtins.formatting.prettier,
 		null_ls.builtins.formatting.prismaFmt,

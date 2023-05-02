@@ -7,7 +7,7 @@ export KEYTIMEOUT=1
 export NVM_DIR="$HOME/.nvm"
 
 # AWS
-export AWS_PROFILE="foodmaven"
+export AWS_PROFILE="acg"
 export SAM_CLI_TELEMETRY=0
 
 # Directories

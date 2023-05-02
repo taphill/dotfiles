@@ -18,6 +18,9 @@ function edit() {
     (g)
       $EDITOR ~/.gitconfig
       ;;
+    (c)
+      $EDITOR ~/.aws/credentials
+      ;;
   esac
 }
 

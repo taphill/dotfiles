@@ -42,7 +42,6 @@ return require("packer").startup(function(use)
 	use("nvim-lualine/lualine.nvim")
 
 	-- Colorscheme
-	use("rebelot/kanagawa.nvim")
 	use("folke/tokyonight.nvim")
 	use("MaxMEllon/vim-jsx-pretty")
 
@@ -50,11 +49,11 @@ return require("packer").startup(function(use)
 	use("mattn/emmet-vim")
 	use("mbbill/undotree")
 	use("windwp/nvim-autopairs")
-	use("prettier/vim-prettier")
 	use("lewis6991/impatient.nvim")
 	use("christoomey/vim-tmux-navigator")
 	use("christoomey/vim-tmux-runner")
 	use("architect/vim-plugin")
+	use("jparise/vim-graphql")
 	-- use '~/dev/projects/vim-plugin'
 
 	-- Text objects

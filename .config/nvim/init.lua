@@ -6,8 +6,6 @@ require("impatient")
 -- See `:help vim.o`
 --
 
-vim.g.gruvbox_material_background = "hard"
-
 -- Set color options
 vim.o.termguicolors = true
 vim.o.background = "dark"

@@ -1,5 +1,15 @@
 export PATH="/Users/taylorphillips/.deno/bin:$PATH"
 
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+
+# For compilers to find postgresql@16 you may need to set:
+#   export LDFLAGS="-L/opt/homebrew/opt/postgresql@16/lib"
+#   export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
+
+# For pkg-config to find postgresql@16 you may need to set:
+#   export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@16/lib/pkgconfig"
+
+
 export EDITOR="nvim"
 export KEYTIMEOUT=1
 

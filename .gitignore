@@ -5,11 +5,13 @@
 
 !.gitconfig
 !.gitignore
+!.irbrc
 !.zprofile
 
 !Brewfile
 
 !install.sh
+
 
 bin/curl
 

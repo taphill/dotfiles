@@ -12,12 +12,8 @@ local lsp = require("lsp-zero").preset({
 
 lsp.ensure_installed({
 	"denols",
-	"prismals",
-	"svelte",
 	"tailwindcss",
 	"tsserver",
-  "unocss",
-	"yamlls",
 })
 
 local lsp_util = require("lspconfig.util")
@@ -26,56 +22,12 @@ lsp.configure("denols", {
 	root_dir = lsp_util.root_pattern("deno.json", "deno.jsonc"),
 })
 
-lsp.configure("svelte", {
-	root_dir = lsp_util.root_pattern("svelte.config.js", "svelte.config.cjs"),
-})
-
 lsp.configure("tailwindcss", {
 	root_dir = lsp_util.root_pattern("tailwind.config.js", "tailwind.config.cjs"),
 })
 
-lsp.configure("unocss", {
-	root_dir = lsp_util.root_pattern("uno.config.js", "uno.config.cjs", "uno.config.ts"),
-})
-
 lsp.configure("tsserver", {
 	root_dir = lsp_util.root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
-})
-
-lsp.configure("graphql", {
-	root_dir = lsp_util.root_pattern(".git"),
-})
-
-lsp.configure("yamlls", {
-	settings = {
-		yaml = {
-			customTags = {
-				"!Base64",
-				"!Cidr",
-				"!FindInMap sequence",
-				"!GetAtt",
-				"!GetAZs",
-				"!ImportValue",
-				"!Join sequence",
-				"!Ref",
-				"!Select sequence",
-				"!Split sequence",
-				"!Sub sequence",
-				"!Sub",
-				"!And sequence",
-				"!Condition",
-				"!Equals sequence",
-				"!If sequence",
-				"!Not sequence",
-				"!Or sequence",
-			},
-			schemas = {
-				["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-				"https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json",
-				"https://raw.githubusercontent.com/aws/serverless-application-model/main/samtranslator/schema/schema.json",
-			},
-		},
-	},
 })
 
 local null_ls = require("null-ls")
@@ -174,7 +126,8 @@ lsp.on_attach(function(client, bufnr)
 	nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 	nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
 	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-	nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+	-- Find something that doesn't conflict
+	-- nmap("P", vim.lsp.buf.signature_help, "Signature Documentation")
 end)
 
 lsp.setup()

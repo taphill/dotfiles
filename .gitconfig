@@ -5,13 +5,15 @@
   defaultBranch = main
 [alias]
   a = add
-  b = branch
+  ; b = branch
+  b = "!. ~/.githelpers && pretty_git_branch"
+  bs = "!. ~/.githelpers && pretty_git_branch_sorted"
   c = commit -m
   co = checkout
   d = diff
   dt = difftool
-  lg = log --graph --decorate --pretty=oneline --abbrev-commit
-  lgv = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  l = "!. ~/.githelpers && pretty_git_log"
+  la = log --graph --decorate --pretty=oneline --abbrev-commit
   s = status --short --branch
   sb = switch 
   u = restore --staged

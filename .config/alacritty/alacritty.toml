@@ -1,0 +1,80 @@
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[[colors.indexed_colors]]
+color = "0xffa066"
+index = 16
+
+[[colors.indexed_colors]]
+color = "0xff5d62"
+index = 17
+
+[colors.bright]
+black = "#6D7070"
+blue = "#1BA6FA"
+cyan = "#73FBF1"
+green = "#B8E466"
+magenta = "#AB9DF2"
+red = "#FF4352"
+white = "#ebdbb2"
+yellow = "#FFD750"
+
+[colors.normal]
+black = "#0d0d0d"
+blue = "#1BA6FA"
+cyan = "#21DEEF"
+green = "#A0E521"
+magenta = "#d3869b"
+red = "#FF301B"
+white = "#ebdbb2"
+yellow = "#FFC620"
+
+[colors.primary]
+background = "0x222436"
+foreground = "0xc8d3f5"
+
+[colors.selection]
+background = "0x2d4f67"
+foreground = "0xc8c093"
+
+[cursor]
+style = "Block"
+
+[font]
+size = 18
+
+[font.bold]
+family = "Consolas for Powerline"
+style = "BoldForPowerline"
+
+[font.italic]
+family = "Consolas for Powerline"
+style = "ItalicForPowerline"
+
+[font.normal]
+family = "Consolas for Powerline"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Shift|Command"
+
+[mouse]
+hide_when_typing = true
+
+[window]
+decorations = "buttonless"
+title = ""
+
+[window.dimensions]
+columns = 160
+lines = 40
+
+[window.padding]
+x = 20
+y = 20

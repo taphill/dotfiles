@@ -4,6 +4,7 @@ alias home="cd $HOME; clear"
 alias src="source $HOME/.config/zsh/.zshrc; clear"
 alias conf="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
+alias vi="nvim"
 alias vs='code -r'
 alias of='nvim "$(fzf)"'
 alias pf='bat "$(fzf)"'
@@ -40,6 +41,19 @@ _comp_options+=(globdots)
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
 eval "$(rbenv init - zsh)"
+
+# OCaml configuration
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/taylorphillips/dev/foodmaven/browser-extension-service/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/taylorphillips/dev/foodmaven/browser-extension-service/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/taylorphillips/dev/foodmaven/browser-extension-service/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/taylorphillips/dev/foodmaven/browser-extension-service/node_modules/tabtab/.completions/sls.zsh
+
+# opam configuration
+[[ ! -r /Users/taylorphillips/.opam/opam-init/init.zsh ]] || source /Users/taylorphillips/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
 
 
 # Configs

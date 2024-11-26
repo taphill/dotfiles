@@ -12,8 +12,8 @@
   co = checkout
   d = diff
   dt = difftool
-  l = "!. ~/.githelpers && pretty_git_log"
-  la = log --graph --decorate --pretty=oneline --abbrev-commit
+  lg = log --graph --decorate --pretty=oneline --abbrev-commit
+  lp = "!. ~/.githelpers && pretty_git_log"
   s = status --short --branch
   sb = switch 
   u = restore --staged

@@ -11,9 +11,11 @@ local lsp = require("lsp-zero").preset({
 })
 
 lsp.ensure_installed({
+  "cssls",
 	"denols",
+  "html",
 	"tailwindcss",
-	"tsserver",
+	"ts_ls",
 })
 
 local lsp_util = require("lspconfig.util")
@@ -26,7 +28,7 @@ lsp.configure("tailwindcss", {
 	root_dir = lsp_util.root_pattern("tailwind.config.js", "tailwind.config.cjs"),
 })
 
-lsp.configure("tsserver", {
+lsp.configure("ts_ls", {
 	root_dir = lsp_util.root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
 })
 
@@ -77,6 +79,7 @@ null_ls.setup({
 		end
 	end,
 })
+
 
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }

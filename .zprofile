@@ -1,5 +1,4 @@
 export PATH="/Users/taylorphillips/.deno/bin:$PATH"
-
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
 # For compilers to find postgresql@16 you may need to set:

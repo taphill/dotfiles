@@ -8,11 +8,12 @@ alias vi="nvim"
 alias vs='code -r'
 alias of='nvim "$(fzf)"'
 alias pf='bat "$(fzf)"'
+alias as="zsh $HOME/bin/tmux_attach_or_create_session.sh"
 alias track="git branch -a | fzf --header 'Track Branch' | xargs git switch --track"
 
-alias ls="exa"
-alias lsa="exa --all --oneline --no-icons"
-alias lst="exa --all --oneline --no-icons --tree --long --git --git-ignore --ignore-glob '.git' --no-permissions --no-user --no-filesize --no-time"
+alias ls="lsd"
+alias lsa="lsd --all --oneline"
+alias lst="lsd --all --oneline --tree --ignore-glob '.git' --ignore-glob 'node_modules'"
 
 alias dkp="docker ps --format 'table {{.Names}}\\t{{.ID}}\\t{{.Image}}\\t{{.Status}}'"
 alias dki="docker images"
@@ -20,8 +21,6 @@ alias dkc="docker container ls --format 'table {{.Names}}\\t{{.ID}}\\t{{.Image}}
 alias dce="docker compose exec"
 alias run="docker compose run --rm"
 alias runp="docker compose run --rm --publish 80:8080"
-
-alias as="zsh $HOME/bin/tmux_attach_or_create_session.sh"
 
 
 # Utilities
@@ -37,23 +36,11 @@ _comp_options+=(globdots)
 
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
 eval "$(rbenv init - zsh)"
-
-# OCaml configuration
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/taylorphillips/dev/foodmaven/browser-extension-service/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/taylorphillips/dev/foodmaven/browser-extension-service/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/taylorphillips/dev/foodmaven/browser-extension-service/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/taylorphillips/dev/foodmaven/browser-extension-service/node_modules/tabtab/.completions/sls.zsh
-
-# opam configuration
-[[ ! -r /Users/taylorphillips/.opam/opam-init/init.zsh ]] || source /Users/taylorphillips/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-
 
 
 # Configs

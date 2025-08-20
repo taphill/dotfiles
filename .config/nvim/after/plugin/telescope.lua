@@ -25,17 +25,15 @@ telescope.setup({
 			},
 		},
 	},
-	extensions = {
-		fzf = {
-			fuzzy = true,
-			override_generic_sorter = true,
-			override_file_sorter = true,
-			case_mode = "smart_case",
-		},
-	},
+  pickers = {
+    find_files = {
+      find_command = {'rg', '--files', '--hidden', '-g', '!.git'},
+      layout_config = {
+        height = 0.70
+      }
+    },
+  },
 })
-
-telescope.load_extension("fzf")
 
 local nmap = function(keys, func, desc)
 	vim.keymap.set("n", keys, func, { desc = desc })
@@ -49,8 +47,17 @@ nmap("<leader>fg", builtin.live_grep, "[F]ind by [G]rep")
 nmap("<leader>fb", builtin.buffers, "[F]ind existing [B]uffers")
 nmap("<leader>fm", builtin.marks, "[F]ind existing [M]arks")
 nmap("<leader>fd", builtin.diagnostics, "[F]ind [D]iagnostics")
-nmap("<leader>fr", builtin.oldfiles, "[F]ind [R]ecently opened files")
 nmap("<leader>fs", builtin.lsp_document_symbols, "[F]ind document [S]ymbols")
+
+nmap("<leader>ff", function()
+	local current_file = vim.api.nvim_buf_get_name(0)
+	local current_dir = vim.fn.fnamemodify(current_file, ":p:h")
+	builtin.find_files({
+		cwd = current_dir,
+		prompt_title = "Current File's Directory",
+	})
+end, "[F]ind files in current directory")
+
 
 nmap("<leader><leader>", function()
 	builtin.current_buffer_fuzzy_find(themes.get_dropdown({

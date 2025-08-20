@@ -8,6 +8,7 @@ alias vi="nvim"
 alias vs='code -r'
 alias of='nvim "$(fzf)"'
 alias pf='bat "$(fzf)"'
+alias vd='git diff $(git diff --name-only HEAD | fzf)'
 alias as="zsh $HOME/bin/tmux_attach_or_create_session.sh"
 alias track="git branch -a | fzf --header 'Track Branch' | xargs git switch --track"
 
@@ -34,13 +35,15 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+# Tool initializations
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
 eval "$(rbenv init - zsh)"
+
+# External sourcing
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
 # Configs
@@ -50,8 +53,11 @@ for zsh_configs in $HOME/.config/zsh/configs/*.zsh; do
 done
 
 
-# Plugins
+# Plugins (load syntax highlighting last for optimal performance)
 
 source $HOME/.config/zsh/plugins/enhancd/init.sh
 source $HOME/.config/zsh/plugins/zsh-autopair/autopair.zsh
 source $HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# bun completions
+[ -s "/Users/taylorphillips/.bun/_bun" ] && source "/Users/taylorphillips/.bun/_bun"

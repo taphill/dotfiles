@@ -1,0 +1,28 @@
+font-size = 18
+
+theme = light:Github-Light-Default,dark:Github-Dark-Default
+
+mouse-hide-while-typing = true
+
+window-padding-x = 16
+window-padding-y = 8
+
+# macos-icon = custom-style
+# macos-icon-ghost-color = bg
+# macos-icon-screen-color = bg
+# macos-icon-frame = beige
+
+macos-titlebar-proxy-icon = hidden
+
+# tabs
+keybind = ctrl+s>l=next_tab
+keybind = ctrl+s>h=previous_tab
+
+# splits
+keybind = ctrl+s>v=new_split:right
+keybind = ctrl+s>x=new_split:down
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+l=goto_split:right
+keybind = shift+enter=text:\n

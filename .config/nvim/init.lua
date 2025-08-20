@@ -1,5 +1,19 @@
+-- Disable some built-in plugins I don't want
+local disabled_built_ins = {
+	"gzip",
+	"man",
+	"shada_plugin",
+	"tarPlugin",
+	"tar",
+	"zipPlugin",
+	"zip",
+}
+
+for i = 1, 7 do
+  vim.g["loaded_" .. disabled_built_ins[i]] = 1
+end
+
 require("plugins")
-require("impatient")
 
 --
 -- [[ Options ]]
@@ -8,7 +22,6 @@ require("impatient")
 
 -- Set color options
 vim.o.termguicolors = true
-vim.o.background = "dark"
 
 -- Set cursorline highlight.
 -- This does make screen redrawing slower when enabled, but I haven't noticed any issues
@@ -45,8 +58,8 @@ vim.o.smartcase = true
 -- Decrease update time
 vim.o.updatetime = 250
 
--- Keep the signcolumn expanded
-vim.wo.signcolumn = "yes"
+-- Should the signcolumn be expanded
+vim.wo.signcolumn = "no"
 
 -- When splitting a window, put the new window below the current
 vim.o.splitbelow = true
@@ -65,7 +78,7 @@ vim.o.ruler = false
 
 -- Maximum column length to highlight syntax
 -- Lower values will help avoid slow redrawing
-vim.bo.synmaxcol = 200
+vim.bo.synmaxcol = 150
 
 --
 -- [[ Keymaps ]]
@@ -91,10 +104,7 @@ vim.keymap.set("n", "<leader>ex", "<cmd>Sexplore<CR>", opts)
 vim.keymap.set("n", "<leader>ev", "<cmd>Vexplore<CR>", opts)
 vim.keymap.set("n", "<leader>z", ":wincmd _<cr>:wincmd |<cr>", opts)
 vim.keymap.set("n", "<leader>=", ":wincmd =<cr>", opts)
-vim.keymap.set("n", "<leader>vs", "<cmd>VtrSendFile<cr>", opts)
-vim.keymap.set("n", "<leader>vc", "<cmd>VtrClearRunner<cr>", opts)
-vim.keymap.set("n", "<leader>voh", '<cmd>VtrOpenRunner {"orientation": "v", "percentage": 50}<cr>', opts)
-vim.keymap.set("n", "<leader>vov", '<cmd>VtrOpenRunner {"orientation": "h", "percentage": 50}<cr>', opts)
+vim.keymap.set("n", "<leader>vs", "<cmd>vsplit<cr>", opts)
 vim.keymap.set("n", ",ws", "<cmd>write <bar> suspend<CR>", opts)
 
 --
@@ -121,21 +131,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 --
 -- [[ Misc. Functions ]]
 --
-
--- Disable some built-in plugins I don't want
-local disabled_built_ins = {
-	"gzip",
-	"man",
-	"shada_plugin",
-	"tarPlugin",
-	"tar",
-	"zipPlugin",
-	"zip",
-}
-
-for i = 1, 7 do
-	vim.g["loaded_" .. disabled_built_ins[i]] = 1
-end
 
 -- Check highlight group
 -- vim.api.nvim_exec(

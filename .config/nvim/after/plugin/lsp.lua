@@ -1,136 +1,91 @@
 --
 -- [[ LSP ]]
--- See `:help lsp-zero`
 --
 
-local lsp = require("lsp-zero").preset({
-	name = "minimal",
-	set_lsp_keymaps = false,
-	manage_nvim_cmp = true,
-	suggest_lsp_servers = false,
-})
-
-lsp.ensure_installed({
-  "cssls",
-	"denols",
-  "html",
-	"tailwindcss",
-	"ts_ls",
-})
-
-local lsp_util = require("lspconfig.util")
-
-lsp.configure("denols", {
-	root_dir = lsp_util.root_pattern("deno.json", "deno.jsonc"),
-})
-
-lsp.configure("tailwindcss", {
-	root_dir = lsp_util.root_pattern("tailwind.config.js", "tailwind.config.cjs"),
-})
-
-lsp.configure("ts_ls", {
-	root_dir = lsp_util.root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
-})
-
-local null_ls = require("null-ls")
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-null_ls.setup({
-	-- Diagnostics for various Linters and formatters
-	sources = {
-		null_ls.builtins.diagnostics.actionlint,
-		null_ls.builtins.diagnostics.cfn_lint,
-		null_ls.builtins.formatting.deno_fmt.with({
-			condition = function(utils)
-				return utils.root_has_file("deno.json", "deno.jsonc")
-			end,
-		}),
-		null_ls.builtins.formatting.prettier.with({
-			condition = function(utils)
-				return utils.root_has_file({
-					".prettierrc",
-					".prettierrc.cjs",
-					".prettierrc.js",
-					".prettierrc.json",
-					".prettierrc.json5",
-					".prettierrc.toml",
-					".prettierrc.yml",
-					".prettierrc.yaml",
-					".prettierrc.yaml",
-					"prettier.config.cjs",
-					"prettier.config.js",
-				})
-			end,
-		}),
-		null_ls.builtins.formatting.prismaFmt,
-		null_ls.builtins.formatting.stylua,
-	},
-
-	-- Format on save
-	on_attach = function(client, bufnr)
-		if client.supports_method("textDocument/formatting") then
-			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = augroup,
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({ bufnr = bufnr })
-				end,
-			})
-		end
-	end,
-})
-
-
+local lspconfig = require("lspconfig")
+local lspconfig_defaults = lspconfig.util.default_config
 local cmp = require("cmp")
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-	["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-	["<C-y>"] = cmp.mapping.confirm({ select = true }),
-	["<C-Space>"] = cmp.mapping.complete(),
+
+--
+-- Add cmp_nvim_lsp capabilities settings to lspconfig
+-- This should be executed before you configure any language server
+--
+
+lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+  "force",
+  lspconfig_defaults.capabilities,
+  require("cmp_nvim_lsp").default_capabilities()
+)
+
+
+--
+-- Enable features that only work if there is a language server active in the file
+--
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  desc = "LSP actions",
+  callback = function(event)
+    local nmap = function(keys, func, desc)
+      if desc then
+        desc = "LSP: " .. desc
+      end
+      vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
+    end
+    nmap("]d", vim.diagnostic.goto_next, "Next Diagnostic")
+    nmap("[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
+    nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+    nmap("gd", vim.lsp.buf.definition, "Go to Definition")
+    nmap("gD", vim.lsp.buf.declaration, "Go to Declaration")
+    nmap("gi", vim.lsp.buf.implementation, "Go to Implementation")
+    nmap("go", vim.lsp.buf.type_definition, "Go to Type Definition")
+    nmap("gr", vim.lsp.buf.references, "Go to References")
+    nmap("gs", vim.lsp.buf.signature_help, "Signature Help")
+    nmap("<F2>", vim.lsp.buf.rename, "Rename Symbol")
+    nmap("<F3>", function() vim.lsp.buf.format({ async = true }) end, "Format Code")
+    nmap("<F4>", vim.lsp.buf.code_action, "Code Action")
+  end,
 })
 
--- disable completion with tab
--- this helps with copilot setup
-cmp_mappings["<Tab>"] = nil
-cmp_mappings["<S-Tab>"] = nil
 
-lsp.setup_nvim_cmp({
-	mapping = cmp_mappings,
+--
+-- Setup language servers
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+--
+
+lspconfig.ts_ls.setup({
+  root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
+  flags = {
+    debounce_text_changes = 150,
+  },
 })
 
-lsp.set_preferences({
-	suggest_lsp_servers = false,
-	sign_icons = {
-		error = "E",
-		warn = "W",
-		hint = "H",
-		info = "I",
-	},
+
+--
+-- Enable completion
+--
+
+cmp.setup({
+  sources = {
+    {name = "nvim_lsp"},
+  },
+  snippet = {
+    expand = function(args)
+      vim.snippet.expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Confirm completion with Enter
+  }),
 })
 
-vim.diagnostic.config({
-	virtual_text = true,
-})
 
-lsp.on_attach(function(client, bufnr)
-	local nmap = function(keys, func, desc)
-		if desc then
-			desc = "LSP: " .. desc
-		end
+--
+-- Diagnostics config
+--
 
-		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-	end
+vim.diagnostic.config {
+  signs = false,
+  underline = true,
+  virtual_text = false,
+}
 
-	nmap("]d", vim.diagnostic.goto_next, "Go to next Diagnostic")
-	nmap("[d", vim.diagnostic.goto_prev, "Go to previous Diagnostic")
-	nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-	nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
-	nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-	nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
-	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-	-- Find something that doesn't conflict
-	-- nmap("P", vim.lsp.buf.signature_help, "Signature Documentation")
-end)
-
-lsp.setup()

@@ -23,7 +23,7 @@
   process = git-lfs filter-process
   required = true
 [core]
-  pager = delta
+  ; pager = delta
   editor = nvim
   autocrlf = input
 [diff]

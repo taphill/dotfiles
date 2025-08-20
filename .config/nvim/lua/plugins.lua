@@ -1,75 +1,51 @@
 return require("packer").startup(function(use)
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
+    -- Packer can manage itself
+    use("wbthomason/packer.nvim")
 
-	-- LSP
-	use({
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v1.x",
-		requires = {
-			-- LSP Support
-			{ "neovim/nvim-lspconfig" },
-			{ "williamboman/mason.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
-			{ "jose-elias-alvarez/null-ls.nvim" },
+    -- LSP
+    use("neovim/nvim-lspconfig")
+    use("hrsh7th/nvim-cmp")
+    use("hrsh7th/cmp-nvim-lsp")
 
-			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" },
-			{ "hrsh7th/cmp-buffer" },
-			{ "hrsh7th/cmp-path" },
-			{ "saadparwaiz1/cmp_luasnip" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-nvim-lua" },
+    -- Treesitter
+    use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+    use({ "nvim-treesitter/playground" })
 
-			-- Snippets
-			{ "L3MON4D3/LuaSnip" },
-			{ "rafamadriz/friendly-snippets" },
-		},
-	})
+    -- Fuzzy Finder
+    use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
 
-	-- Treesitter
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	use({ "nvim-treesitter/playground" })
+    -- Statusline
+    use("nvim-lualine/lualine.nvim")
 
-	-- Fuzzy Finder (files, lsp, etc)
-	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+    -- Colorscheme
+    use("folke/tokyonight.nvim")
+    use ("projekt0n/github-nvim-theme")
 
-	-- Copilot
-	use("github/copilot.vim")
+    -- Syntax
+    use("MaxMEllon/vim-jsx-pretty")
+    use("sbdchd/neoformat")
 
-	-- Statusline
-	use("nvim-lualine/lualine.nvim")
+    -- Utilities
+    use("mattn/emmet-vim")
+    use("mbbill/undotree")
+    use("windwp/nvim-autopairs")
+    use("architect/vim-plugin")
+    use("jparise/vim-graphql")
+    use("christoomey/vim-tmux-navigator")
 
-	-- Colorscheme
-	use("folke/tokyonight.nvim")
-	use("MaxMEllon/vim-jsx-pretty")
+    -- Text objects
+    use("wellle/targets.vim")
+    use("kana/vim-textobj-line")
+    use("kana/vim-textobj-user")
+    use("kana/vim-textobj-entire")
+    use("michaeljsmith/vim-indent-object")
 
-	-- Utilities
-	use("mattn/emmet-vim")
-	use("mbbill/undotree")
-	use("windwp/nvim-autopairs")
-	use("lewis6991/impatient.nvim")
-	use("christoomey/vim-tmux-navigator")
-	use("christoomey/vim-tmux-runner")
-	use("architect/vim-plugin")
-	use("jparise/vim-graphql")
-	-- use '~/dev/projects/vim-plugin'
-
-	-- Text objects
-	use("wellle/targets.vim")
-	use("kana/vim-textobj-line")
-	use("kana/vim-textobj-user")
-	use("kana/vim-textobj-entire")
-	use("michaeljsmith/vim-indent-object")
-
-	-- Tpope stuff
-	use("tpope/vim-commentary")
-	use("tpope/vim-endwise")
-	use("tpope/vim-fugitive")
-	use("tpope/vim-rails")
-	use("tpope/vim-repeat")
-	use("tpope/vim-surround")
-	use("tpope/vim-unimpaired")
-	use("tpope/vim-vinegar")
+    -- Tpope stuff
+    use("tpope/vim-commentary")
+    use("tpope/vim-endwise")
+    use("tpope/vim-fugitive")
+    use("tpope/vim-repeat")
+    use("tpope/vim-surround")
+    use("tpope/vim-unimpaired")
+    use("tpope/vim-vinegar")
 end)

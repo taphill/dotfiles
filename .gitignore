@@ -21,6 +21,8 @@ bin/curl
 .config/nvim/plugin
 .config/planetscale
 .config/yarn
+.config/zed/conversations/
+.config/zed/prompts/
 .config/zsh/.zcompcache/
 .config/zsh/.zcompdump
 .config/zsh/.zinit/

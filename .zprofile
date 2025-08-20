@@ -1,19 +1,22 @@
-export PATH="/Users/taylorphillips/.deno/bin:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+# PATH exports
+export PATH="/Users/taylorphillips/.local/bin:$PATH"  # Python package management (uv)
+export PATH="/Users/taylorphillips/.deno/bin:$PATH"   # Deno runtime
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"  # PostgreSQL tools
 
-# For compilers to find postgresql@16 you may need to set:
-#   export LDFLAGS="-L/opt/homebrew/opt/postgresql@16/lib"
-#   export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
-
-# For pkg-config to find postgresql@16 you may need to set:
-#   export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@16/lib/pkgconfig"
-
-
+# Editor and shell settings
 export EDITOR="nvim"
 export KEYTIMEOUT=1
+export TERM="xterm-256color"  # Needed for neovim syntax highlighting in tmux
 
 # Node
 export NVM_DIR="$HOME/.nvm"
+
+# PostgreSQL development setup (optional - uncomment if needed for compiling)
+# For compilers to find postgresql@16 you may need to set:
+#   export LDFLAGS="-L/opt/homebrew/opt/postgresql@16/lib"
+#   export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
+# For pkg-config to find postgresql@16 you may need to set:
+#   export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@16/lib/pkgconfig"
 
 # AWS
 export AWS_PROFILE="acg"
@@ -34,11 +37,5 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-r
 
-# Bat theme
-export BAT_THEME='gruvbox-dark'
-
-# Enhancd options
+# Plugin options
 export ENHANCD_DISABLE_DOT=1
-
-# This is needed so that neovim syntax highlighting works in tmux
-export TERM="xterm-256color"
